@@ -1,0 +1,9 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource>
+        <file>img/open.png</file>
+        <file>img/save.png</file>
+        <file>img/record.png</file>
+        <file>img/play.png</file>
+        <file>img/icon.png</file>
+</qresource>
+</RCC>
