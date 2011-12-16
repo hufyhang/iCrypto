@@ -43,20 +43,6 @@ Ui::Ui(QWidget *parent) : QWidget(parent)
   guest_email->setReadOnly(true);
   guest_email->setText(crypto->getGuestEmail());
 
-  /*
-  usrProfileButton = new QPushButton(tr("Load User Profile"), this);
-  usrFileButton = new QPushButton(tr("Crypto File"), this);
-  usrSaveButton = new QPushButton(tr("Save"), this);
-  guestProfileButton = new QPushButton(tr("Load Guest Profile"), this);
-  guestFileButton = new QPushButton(tr("Encrypto File"), this);
-
-  connect(usrProfileButton, SIGNAL(clicked()), this, SLOT(loadUserProfile()));
-  connect(usrFileButton, SIGNAL(clicked()), this, SLOT(startCrypto()));
-  connect(usrSaveButton, SIGNAL(clicked()), this, SLOT(saveProfile()));
-  connect(guestProfileButton, SIGNAL(clicked()), this, SLOT(loadGuestProfile()));
-  connect(guestFileButton, SIGNAL(clicked()), this, SLOT(startEncrypto()));
-  */
-
   usrLayout = new QGridLayout(this);
   guestLayout = new QGridLayout(this);
 
@@ -69,12 +55,6 @@ Ui::Ui(QWidget *parent) : QWidget(parent)
   usrLayout->addWidget(usr_email_label, 3, 0, 1, 1);
   usrLayout->addWidget(usr_email, 3, 1, 1, 3);
 
-  /*
-  usrLayout->addWidget(usrSaveButton, 4, 0, 2, 1);
-  usrLayout->addWidget(usrProfileButton, 4, 1, 2, 1);
-  usrLayout->addWidget(usrFileButton, 4, 2, 2, 2);
-  */
-
   guestLayout->addWidget(guest_usrname_label, 0, 0, 1, 1);
   guestLayout->addWidget(guest_usrname, 0, 1, 1, 3);
   guestLayout->addWidget(guest_key_label, 1, 0, 1, 1);
@@ -83,11 +63,6 @@ Ui::Ui(QWidget *parent) : QWidget(parent)
   guestLayout->addWidget(guest_institute, 2, 1, 1, 3);
   guestLayout->addWidget(guest_email_label, 3, 0, 1, 1);
   guestLayout->addWidget(guest_email, 3, 1, 1, 3);
-
-  /*
-  guestLayout->addWidget(guestProfileButton, 4, 0, 2, 2);
-  guestLayout->addWidget(guestFileButton, 4, 2, 2, 2);
-  */
 
   usrWidget->setLayout(usrLayout);
   guestWidget->setLayout(guestLayout);

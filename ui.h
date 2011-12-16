@@ -39,11 +39,6 @@ private:
   QLineEdit *usr_usrname, *usr_key, *usr_institute, *usr_email;
   QLineEdit *guest_usrname, *guest_key, *guest_institute, *guest_email;
 
-  /*
-  QPushButton *usrProfileButton, *usrFileButton, *usrSaveButton;
-  QPushButton *guestProfileButton, *guestFileButton;
-  */
-
   QGridLayout *usrLayout, *guestLayout;
 };
 

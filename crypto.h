@@ -5,12 +5,13 @@
 #include <QTextStream>
 #include <QMessageBox>
 #include <QStringList>
+#include <QTime>
+#include <QGlobal.h>
 
 #include <cstddef>
 
 #define SEPARATOR "@@@"
 #define USRMARK "<USR_INFO>"
-#define MAGIC 6
 
 #define HOST 0
 #define QUEST 1
@@ -19,6 +20,9 @@
 #define KEY 1
 #define INSTITUTE 2
 #define EMAIL 3
+#define MAGIC 4
+
+#define MAGIC_MARK "\\"
 
 class Crypto
 {
@@ -42,11 +46,16 @@ public:
   QString getGuestInstitute() {return guestInstitute;}
   QString getGuestEmail() {return guestEmail;}
 
+  QString getUsrMagic() {return usrMagic;}
+  QString getGuestMagic() {return guestMagic;}
+
 protected:
   QString read(const QString &_filename);
   bool write(const QString &_content, const QString &_filename);
-  QString crypt(const QString &_info);
-  QString encrypt(const QString &_info);
+  QString crypt(const QString &_info, const int _magic);
+  QString encrypt(const QString &_info, const int _magic);
+
+  QString genMagic(const QString &_key);
 
 private:
   QString usrname, guestName;
@@ -54,6 +63,7 @@ private:
   QString institute, guestInstitute;
   QString email, guestEmail;
   QString usrInfo, guestInfo;
+  QString usrMagic, guestMagic;
 };
 
 #endif
