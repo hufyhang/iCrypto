@@ -2,6 +2,7 @@
 #define _UI_H
 
 #include "crypto.h"
+#include "result_dialog.h"
 #include <QWidget>
 #include <QLineEdit>
 #include <QPushButton>
@@ -20,6 +21,7 @@ Q_OBJECT
 public:
   Ui(QWidget *parent = 0);
   ~Ui();
+  void gotoTab(const int _index);
 
 public slots:
   void loadUserProfile();

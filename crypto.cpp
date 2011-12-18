@@ -48,7 +48,6 @@ QString Crypto::crypt(const QString &_info, const int _magic)
     if(buffer[index] == '\n') {
       continue;
     }
-
     buffer[index] = QChar::fromAscii(buffer[index].toAscii() + _magic);
   }
   return buffer;
@@ -151,7 +150,7 @@ void Crypto::encrptoUser(const QString &_filename, const int _Role)
     usrMagic = magic;
     break;
 
-  case QUEST:
+  case GUEST:
     guestName = name;
     guestKey = ke;
     guestInstitute = ins;

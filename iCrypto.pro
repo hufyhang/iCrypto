@@ -8,8 +8,8 @@ DEPENDPATH += .
 INCLUDEPATH += .
 
 # Input
-HEADERS += crypto.h ui.h window.h
-SOURCES += crypto.cpp main.cpp ui.cpp window.cpp
+HEADERS += crypto.h ui.h window.h result_widget.h result_dialog.h
+SOURCES += crypto.cpp main.cpp ui.cpp window.cpp result_widget.cpp result_dialog.cpp
 RESOURCES += resources.qrc
 
 ICON = key.icns

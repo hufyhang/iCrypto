@@ -2,6 +2,7 @@
 #define _WINDOW_H
 
 #include "ui.h"
+#include "result_dialog.h"
 #include <QMainWindow>
 #include <QVBoxLayout>
 #include <QStatusBar>
@@ -18,6 +19,7 @@ Q_OBJECT
 public:
   Window(QWidget *parent = 0);
   ~Window();
+  bool getPreviewState();
 
 protected:
   void createActions();
@@ -26,6 +28,7 @@ protected:
 
 private:
   Ui *ui;
+  ResultDialog *resultDialog;
   QWidget *topFiller, *bottomFiller, *container;
   QVBoxLayout *layout;
 
@@ -33,6 +36,7 @@ private:
   QMenu *usrSubMenu, *guestSubMenu;
   QAction *saveUsrAct, *loadUsrAct, *cryptAct;
   QAction *loadGuestAct, *encryptAct;
+  QAction *previewAct;
   QToolBar *fileToolbar;
 };
 

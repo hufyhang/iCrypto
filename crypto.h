@@ -14,7 +14,7 @@
 #define USRMARK "<USR_INFO>"
 
 #define HOST 0
-#define QUEST 1
+#define GUEST 1
 
 #define NAME 0
 #define KEY 1
@@ -27,6 +27,9 @@
 class Crypto
 {
 public:
+  static const int CryptoHost = HOST;
+  static const int CryptoGuest = GUEST;
+
   Crypto();
   ~Crypto();
 
@@ -49,8 +52,9 @@ public:
   QString getUsrMagic() {return usrMagic;}
   QString getGuestMagic() {return guestMagic;}
 
-protected:
   QString read(const QString &_filename);
+
+protected:
   bool write(const QString &_content, const QString &_filename);
   QString crypt(const QString &_info, const int _magic);
   QString encrypt(const QString &_info, const int _magic);

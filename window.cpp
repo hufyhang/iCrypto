@@ -25,7 +25,7 @@ Window::Window(QWidget *parent) : QMainWindow(parent)
   setMinimumSize(640, 300);
   setWindowTitle(tr("iCrypto"));
 
-  statusBar()->showMessage(tr("iCrypto Ver. 1.0"));
+  statusBar()->showMessage(tr("iCrypto for Mac OS X"));
 }
 
 Window::~Window()
@@ -42,22 +42,27 @@ void Window::createActions()
   loadUsrAct->setStatusTip(tr("Open & load existing user profile as hosts."));
   connect(loadUsrAct, SIGNAL(triggered()), ui, SLOT(loadUserProfile()));
 
-  cryptAct = new QAction(QIcon(":/img/record.png"), tr("&Crypto..."), this);
-  cryptAct->setStatusTip(tr("Crypto document."));
+  cryptAct = new QAction(QIcon(":/img/record.png"), tr("&Encrypt..."), this);
+  cryptAct->setStatusTip(tr("Encrypt document."));
   connect(cryptAct, SIGNAL(triggered()), ui, SLOT(startCrypto()));
 
   loadGuestAct = new QAction(QIcon(":/img/open.png"), tr("&Load guest..."), this);
   loadGuestAct->setStatusTip(tr("Open & load existing user profile as guests."));
   connect(loadGuestAct, SIGNAL(triggered()), ui, SLOT(loadGuestProfile()));
 
-  encryptAct = new QAction(QIcon(":/img/play.png"), tr("&Encrypto..."), this);
-  encryptAct->setStatusTip(tr("Encrypto document."));
+  encryptAct = new QAction(QIcon(":/img/play.png"), tr("&Decrypt..."), this);
+  encryptAct->setStatusTip(tr("Decrypt document."));
   connect(encryptAct, SIGNAL(triggered()), ui, SLOT(startEncrypto()));
+
+  previewAct = new QAction(QIcon(":/img/preview.png"), tr("&Preview"), this);
+  previewAct->setStatusTip(tr("Toggle preview mode."));
+  previewAct->setCheckable(true);
 }
 
 void Window::createToolbars()
 {
   fileToolbar = addToolBar(tr("File"));
+  fileToolbar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
 
   fileToolbar->addAction(loadUsrAct);
   fileToolbar->addAction(saveUsrAct);
@@ -65,6 +70,8 @@ void Window::createToolbars()
   fileToolbar->addSeparator();
   fileToolbar->addAction(loadGuestAct);
   fileToolbar->addAction(encryptAct);
+  fileToolbar->addSeparator();
+  fileToolbar->addAction(previewAct);
 
   fileToolbar->setFloatable(false);
   fileToolbar->setAllowedAreas(Qt::TopToolBarArea | Qt::BottomToolBarArea | 
@@ -87,6 +94,12 @@ void Window::createMenus()
   guestSubMenu->addAction(loadGuestAct);
   guestSubMenu->addSeparator();
   guestSubMenu->addAction(encryptAct);
+}
+
+bool Window::getPreviewState()
+{
+  bool result = previewAct->isChecked() ? true : false;
+  return result;
 }
 
 

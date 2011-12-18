@@ -8,9 +8,9 @@ Ui::Ui(QWidget *parent) : QWidget(parent)
   usrWidget = new QWidget();
   guestWidget = new QWidget();
 
-  usr_usrname_label = new QLabel(tr("Username"));
+  usr_usrname_label = new QLabel(tr("Full name"));
   usr_usrname_label->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-  usr_key_label = new QLabel(tr("Safe-key"));
+  usr_key_label = new QLabel(tr("Safe-key (Max. 60)"));
   usr_key_label->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
   usr_institute_label = new QLabel(tr("Institute"));
   usr_institute_label->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
@@ -27,6 +27,7 @@ Ui::Ui(QWidget *parent) : QWidget(parent)
 
   usr_usrname = new QLineEdit();
   usr_key = new QLineEdit();
+  usr_key->setMaxLength(60);
   usr_institute = new QLineEdit();
   usr_email = new QLineEdit();
 
@@ -90,6 +91,8 @@ void Ui::loadUserProfile()
     usr_key->setText(crypto->getKey());
     usr_institute->setText(crypto->getInstitute());
     usr_email->setText(crypto->getEmail());
+
+    gotoTab(Crypto::CryptoHost);
   }
 }
 
@@ -111,6 +114,13 @@ void Ui::saveProfile()
 
 void Ui::startCrypto()
 {
+  if(usr_usrname->text().length() * usr_key->text().length() * 
+     usr_institute->text().length() * usr_email->text().length() == 0) {
+    QMessageBox::warning(0, "", tr("Invalid user profile data provided."));
+
+    return;
+  }
+
   QString from = "";
   QFileDialog *dialog = new QFileDialog(this);
   from = dialog->getOpenFileName(this, tr("Open..."), "", tr("Text file (*.txt)"));
@@ -135,6 +145,8 @@ void Ui::loadGuestProfile()
     guest_key->setText(crypto->getGuestKey());
     guest_institute->setText(crypto->getGuestInstitute());
     guest_email->setText(crypto->getGuestEmail());
+
+    gotoTab(Crypto::CryptoGuest);
   }
 }
 
@@ -149,7 +161,21 @@ void Ui::startEncrypto()
     to = dialog->getSaveFileName(this, tr("Save as..."), "", tr("Text file (*.txt)"));
     if(to.length() != 0) {
       crypto->encryptoInfo(from, to);
+      QString content = crypto->read(to);
+      
+      if(content.length() != 0) {
+        ResultDialog *dialog = new ResultDialog(content, this);
+        dialog->show();
+        dialog->raise();
+        dialog->activateWindow();
+      }
+
     }
   }
+}
+
+void Ui::gotoTab(const int _index)
+{
+  tab->setCurrentIndex(_index);
 }
 
