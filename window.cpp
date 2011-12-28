@@ -57,6 +57,10 @@ void Window::createActions()
   previewAct = new QAction(QIcon(":/img/preview.png"), tr("&Preview"), this);
   previewAct->setStatusTip(tr("Toggle preview mode."));
   previewAct->setCheckable(true);
+  previewAct->setEnabled(false);
+
+  aboutQtAct = new QAction(tr("Qt Framework"), this);
+  connect(aboutQtAct, SIGNAL(triggered()), this, SLOT(aboutQt()));
 }
 
 void Window::createToolbars()
@@ -94,6 +98,8 @@ void Window::createMenus()
   guestSubMenu->addAction(loadGuestAct);
   guestSubMenu->addSeparator();
   guestSubMenu->addAction(encryptAct);
+
+  helpMenu->addAction(aboutQtAct);
 }
 
 bool Window::getPreviewState()

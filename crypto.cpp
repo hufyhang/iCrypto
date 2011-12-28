@@ -50,6 +50,7 @@ QString Crypto::crypt(const QString &_info, const int _magic)
     }
     buffer[index] = QChar::fromAscii(buffer[index].toAscii() + _magic);
   }
+
   return buffer;
 }
 
@@ -64,6 +65,7 @@ QString Crypto::encrypt(const QString &_info, const int _magic)
     }
     buffer[index] = QChar::fromAscii(buffer[index].toAscii() - _magic);
   }
+
   return buffer;
 }
 

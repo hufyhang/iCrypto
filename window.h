@@ -37,6 +37,7 @@ private:
   QAction *saveUsrAct, *loadUsrAct, *cryptAct;
   QAction *loadGuestAct, *encryptAct;
   QAction *previewAct;
+  QAction *aboutQtAct;
   QToolBar *fileToolbar;
 };
 

@@ -98,6 +98,11 @@ void Ui::loadUserProfile()
 
 void Ui::saveProfile()
 {
+  if(!usr_email->text().contains('@') ||usr_email->text().length() < 2) {
+    QMessageBox::warning(0, tr(""), tr("Invalid E-mail address."));
+    return;
+  }
+
   QString filename = "";
   QFileDialog *dialog = new QFileDialog(this);
   filename = dialog->getSaveFileName(this, tr("Save..."), "", tr("iCrypto profile (*.pro)"));
@@ -121,9 +126,14 @@ void Ui::startCrypto()
     return;
   }
 
+  if(!usr_email->text().contains('@') ||usr_email->text().length() < 2) {
+    QMessageBox::warning(0, tr(""), tr("Invalid E-mail address."));
+    return;
+  }
+
   QString from = "";
   QFileDialog *dialog = new QFileDialog(this);
-  from = dialog->getOpenFileName(this, tr("Open..."), "", tr("Text file (*.txt)"));
+  from = dialog->getOpenFileName(this, tr("Open..."), "", tr("All files (*.*)"));
   if(from.length() != 0) {
     QString to = "";
     QFileDialog *dialog = new QFileDialog(this);
@@ -158,7 +168,7 @@ void Ui::startEncrypto()
   if(from.length() != 0) {
     QString to = "";
     QFileDialog *dialog = new QFileDialog(this);
-    to = dialog->getSaveFileName(this, tr("Save as..."), "", tr("Text file (*.txt)"));
+    to = dialog->getSaveFileName(this, tr("Save as..."), "", tr("All files (*.*)"));
     if(to.length() != 0) {
       crypto->encryptoInfo(from, to);
       QString content = crypto->read(to);
