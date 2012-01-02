@@ -98,7 +98,7 @@ void Ui::loadUserProfile()
 
 void Ui::saveProfile()
 {
-  if(!usr_email->text().contains('@') ||usr_email->text().length() < 2) {
+  if(validateEmail(usr_email->text())) {
     QMessageBox::warning(0, tr(""), tr("Invalid E-mail address."));
     return;
   }
@@ -126,7 +126,7 @@ void Ui::startCrypto()
     return;
   }
 
-  if(!usr_email->text().contains('@') ||usr_email->text().length() < 2) {
+  if(validateEmail(usr_email->text())) {
     QMessageBox::warning(0, tr(""), tr("Invalid E-mail address."));
     return;
   }
@@ -158,6 +158,16 @@ void Ui::loadGuestProfile()
 
     gotoTab(Crypto::CryptoGuest);
   }
+}
+
+bool Ui::validateEmail(const QString &_email) {
+  bool result = false;
+  if(!_email.contains('@') || 
+     !_email.contains('.') || 
+     _email.length() < 2) {
+    result = true;
+  }
+  return result;
 }
 
 void Ui::startEncrypto()

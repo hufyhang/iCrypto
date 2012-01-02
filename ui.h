@@ -30,6 +30,9 @@ public slots:
   void loadGuestProfile();
   void startEncrypto();
 
+protected:
+  bool validateEmail(const QString &_email);
+
 private:
   Crypto *crypto;
 
