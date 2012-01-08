@@ -170,7 +170,7 @@ bool Ui::validateEmail(const QString &_email) {
   return result;
 }
 
-void Ui::startEncrypto()
+void Ui::startEncrypto(bool isPreviewed)
 {
   QString from = "";
   QFileDialog *dialog = new QFileDialog(this);
@@ -183,7 +183,7 @@ void Ui::startEncrypto()
       crypto->encryptoInfo(from, to);
       QString content = crypto->read(to);
       
-      if(content.length() != 0) {
+      if(content.length() != 0 && isPreviewed) {
         ResultDialog *dialog = new ResultDialog(content, this);
         dialog->show();
         dialog->raise();

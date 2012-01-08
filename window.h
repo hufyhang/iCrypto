@@ -26,6 +26,13 @@ protected:
   void createMenus();
   void createToolbars();
 
+public slots:
+  void encrypt();
+
+signals:
+  void explains();
+  void encryptSig(bool isPreviewed);
+
 private:
   Ui *ui;
   ResultDialog *resultDialog;

@@ -28,7 +28,7 @@ public slots:
   void saveProfile();
   void startCrypto();
   void loadGuestProfile();
-  void startEncrypto();
+  void startEncrypto(bool isPreviewed);
 
 protected:
   bool validateEmail(const QString &_email);

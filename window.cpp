@@ -52,12 +52,13 @@ void Window::createActions()
 
   encryptAct = new QAction(QIcon(":/img/play.png"), tr("&Decrypt..."), this);
   encryptAct->setStatusTip(tr("Decrypt document."));
-  connect(encryptAct, SIGNAL(triggered()), ui, SLOT(startEncrypto()));
+  connect(encryptAct, SIGNAL(triggered()), this, SLOT(encrypt()));
+  connect(this, SIGNAL(encryptSig(bool)), ui, SLOT(startEncrypto(bool)));
 
   previewAct = new QAction(QIcon(":/img/preview.png"), tr("&Preview"), this);
   previewAct->setStatusTip(tr("Toggle preview mode."));
   previewAct->setCheckable(true);
-  previewAct->setEnabled(false);
+  previewAct->setChecked(true);
 
   aboutQtAct = new QAction(tr("Qt Framework"), this);
   connect(aboutQtAct, SIGNAL(triggered()), this, SLOT(aboutQt()));
@@ -106,6 +107,12 @@ bool Window::getPreviewState()
 {
   bool result = previewAct->isChecked() ? true : false;
   return result;
+}
+
+void Window::encrypt()
+{
+  bool isPreviewed = getPreviewState();
+  emit encryptSig(isPreviewed);
 }
 
 
